@@ -60,26 +60,40 @@ for site_id in cluster['site']:
             run_core_script = "ssh " + site['username'] + "@" + site['ip_address'] + " 'cd /var/www/HIS-Core && ./core_setup.sh'"
             os.system(run_core_script)
 
+            result = Connection("" + site['username'] + "@" + site['ip_address'] + "").run('cd /var/www/HIS-Core && git describe', hide=True)
+            
+            msg = "{0.stdout}"
+            
+            version = msg.format(result).strip()
+            
+            core_version = "v5.0.5"
+            
+            if core_version == version:
+                msgx = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
+            else:
+                msgx = "Hi there,\n\nSomething went wrong while checking out to the latest HIS-Core version. Current version is " + version + " for " + site['name'] + ".\n\nThanks!\nEGPAF HIS."
+
             # send sms alert
             for recipient in recipients:
-                msg = "Hi there,\n\nDeployment of CORE to v5.0.5 for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
+                msg = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
                 params = {
                     "api_key": os.getenv('API_KEY'),
                     "recipient": recipient,
-                    "message": msg
+                    "message": msgx
                 }
                 alert("http://sms-api.hismalawi.org/v1/sms/send", params)
 
+            # close the while loop
             count = 3
 
         else:
-
+            # increment the count
             count = count + 1
 
             # make sure we are sending the alert at the last pint attempt
             if count == 3:
                 for recipient in recipients:
-                    msg = "Hi there,\n\nDeployment of CORE to v5.0.5 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
+                    msg = "Hi there,\n\nDeployment of HIS-Core to V5.0.5 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
                     params = {
                         "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
