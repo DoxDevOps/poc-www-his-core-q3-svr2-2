@@ -31,36 +31,17 @@ echo "Your build number is: \\${REQUEST_ID} -> ${REQUEST_ID}"'''
         stage('Fetching Core') {
           steps {
             echo 'Starting to fetch Core from GitHub'
-            echo 'Checking if BHT-Core exists.'
-            sh '[ -d "BHT-Core" ] && echo "Core already cloned." || git clone https://github.com/HISMalawi/BHT-Core.git'
+            echo 'Checking if HIS-Core exists.'
+            sh '[ -d "HIS-Core" ] && echo "Core already cloned." || git clone https://github.com/HISMalawi/HIS-Core-release.git HIS-Core'
             echo 'Giving access to users'
-            sh 'cd $WORKSPACE && chmod 777 BHT-Core'
+            sh 'cd $WORKSPACE && chmod 777 HIS-Core'
             echo 'Fetching New Tags'
-            sh 'cd $WORKSPACE/BHT-Core && git fetch --tags -f'
+            sh 'cd $WORKSPACE/HIS-Core && git fetch --tags -f'
             echo 'Checking out to latest tag'
-            sh '#cd $WORKSPACE/BHT-Core && git checkout $(git describe --tags `git rev-list --tags --max-count=1`)'
-            echo 'creating apps folder in Core'
-            sh '[ -d "$WORKSPACE/BHT-Core/apps" ] && echo "apps already exists." || cd $WORKSPACE/BHT-Core && mkdir apps'
-            echo 'giving access rights to apps folder'
-            sh 'cd $WORKSPACE/BHT-Core && chmod 777 apps'
+            sh '#cd $WORKSPACE/HIS-Core && git checkout $(git describe --tags `git rev-list --tags --max-count=1`)'
           }
         }
 
-      }
-    }
-
-    stage('Fetching ART') {
-      steps {
-        echo 'Starting to fetch ART from GitHub'
-        echo 'Checking if BHT-Core-Apps-ART exists.'
-        sh '[ -d "$WORKSPACE/BHT-Core/apps/ART" ] && echo "ART already cloned." || git clone https://github.com/HISMalawi/BHT-Core-Apps-ART.git $WORKSPACE/BHT-Core/apps/ART'
-        echo 'Giving access to all user'
-        sh 'cd $WORKSPACE/BHT-Core/apps && chmod 777 ART'
-        echo 'Fetching new tags'
-        sh 'cd $WORKSPACE/BHT-Core/apps/ART && git fetch --tags -f'
-        echo 'Checking out to latest tag'
-        sh '#cd $WORKSPACE/BHT-Core/apps/ART && git checkout $(git describe --tags `git rev-list --tags --max-count=1`)'
-        sh '#cd $WORKSPACE/BHT-Core/apps/ART && git describe > HEAD'
       }
     }
 
@@ -77,7 +58,7 @@ echo "Your build number is: \\${REQUEST_ID} -> ${REQUEST_ID}"'''
           }
         }
 
-        stage('Core & ART') {
+        stage('HIS-Core') {
           steps {
             echo 'Shipping & configuring Core & ART'
             sh '''#python3 core_shippingx.py
