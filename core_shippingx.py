@@ -55,6 +55,10 @@ for site_id in cluster['site']:
             #* ship data to remote site
             push_core = "rsync " + "-r $WORKSPACE/HIS-Core " + site['username'] + "@" + site['ip_address'] + ":/var/www/html"
             os.system(push_core)
+            
+            # run setup script
+            run_core_script = "ssh " + site['username'] + "@" + site['ip_address'] + " 'cd /var/www/HIS-Core && ./core_setup.sh'"
+            os.system(run_core_script)
 
             # send sms alert
             for recipient in recipients:
