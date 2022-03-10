@@ -53,7 +53,7 @@ for site_id in cluster['site']:
             #os.system(backup_script)
             
             #* ship data to remote site
-            push_core = "rsync " + "-r $WORKSPACE/HIS-Core " + site['username'] + "@" + site['ip_address'] + ":/var/www/html"
+            push_core = "rsync " + "-r $WORKSPACE/HIS-Core " + site['username'] + "@" + site['ip_address'] + ":/var/www"
             os.system(push_core)
             
             # run setup script
