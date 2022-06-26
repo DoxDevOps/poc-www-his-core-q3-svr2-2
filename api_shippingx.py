@@ -53,9 +53,13 @@ for site_id in cluster['site']:
             #backup_script = "ssh " + site['username'] + "@" + site['ip_address'] + " 'cd /var/www && chmod 777 devops_api_backup.sh && ./devops_api_backup.sh'"
             #os.system(backup_script)
             
-            # ship data to remote site
+            # ship api to remote site
             push_api = "rsync " + "-r $WORKSPACE/BHT-EMR-API " + site['username'] + "@" + site['ip_address'] + ":/var/www"
             os.system(push_api)
+            
+            # ship api script to remote site
+            push_api_script = "rsync " + "-r $WORKSPACE/api_setup.sh " + site['username'] + "@" + site['ip_address'] + ":/var/www/BHT-EMR-API"
+            os.system(push_api_script)
             
             # run setup script
             run_api_script = "ssh " + site['username'] + "@" + site['ip_address'] + " 'cd /var/www/BHT-EMR-API && ./api_setup.sh'"
