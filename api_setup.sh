@@ -16,9 +16,6 @@ echo "Installing Local Gems"
 echo "____________________________________________"
 bundle install --local
 echo "--------------------------------------------"
-#echo "killing sync_worker cron job"
-#pkill -f bin/lab/sync_worker.rb
-echo "____________________________________________"
 echo "running bin_update art"
 echo "____________________________________________"
 ./bin/update_art_metadata.sh development
