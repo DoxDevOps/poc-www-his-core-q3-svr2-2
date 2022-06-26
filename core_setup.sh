@@ -10,5 +10,5 @@ git describe > HEAD
 echo "____________________________________________"
 echo "Making changes to config.json"
 echo "____________________________________________"
-cp config.json.example application.json
+#cp config.json.example application.json
 echo "____________________________________________"
