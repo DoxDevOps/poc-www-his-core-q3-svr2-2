@@ -24,9 +24,12 @@ def get_xi_data(url):
 * return dict
 """
 def alert(url, params):
-    headers = {'Content-type': 'application/json; charset=utf-8'}
-    r = requests.post(url, json=params, headers=headers)
-    return r
+    try:
+        headers = {'Content-type': 'application/json; charset=utf-8'}
+        r = requests.post(url, json=params, headers=headers)
+        return r
+    except Exception as e:
+        print(f"Failed with exception, {e}")
 
 recipients = ["+265998006237", "+265991450316", "+265995246144", "+265998276712", "+265888231289", "+265999500312", "+265888000187","+265992268777","+265993030442","+265997762646","+265996551261","+265999755473","+265992215557","+265999453942"]
 
