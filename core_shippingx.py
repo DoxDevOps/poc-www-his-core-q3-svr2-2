@@ -30,10 +30,10 @@ def alert(url, params):
         return False
     return True
 
-recipients = ["+265998006237", "+265991450316","+265992182669", "+265995246144", "+265998276712", "+265999959499", "+265995316633", "+265995628519", "+265993945872"]
+recipients = ["+265998006237", "+265991450316","+265992182669", "+265995246144"]
 
 #* Get cluster details
-cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/39')
+cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/21')
 
 for site_id in cluster['site']:
     site = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_site/' + str(site_id))
@@ -76,13 +76,13 @@ for site_id in cluster['site']:
             core_version = "v1.2.12"
             
             if core_version == version:
-                msgx = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
+                msgx = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
             else:
-                msgx = "Hi there,\n\nSomething went wrong while checking out to the latest HIS-Core version. Current version is " + version + " for " + site['name'] + ".\n\nThanks!\nEGPAF HIS."
+                msgx = "Hi there,\n\nSomething went wrong while checking out to the latest HIS-Core version. Current version is " + version + " for " + site['name'] + ".\n\nThanks!\nEGPAF/LIN HIS."
 
             # send sms alert
             for recipient in recipients:
-                msg = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
+                msg = "Hi there,\n\nDeployment of HIS-Core to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
                 params = {
                     "api_key": os.getenv('API_KEY'),
                     "recipient": recipient,
@@ -100,7 +100,7 @@ for site_id in cluster['site']:
             # make sure we are sending the alert at the last pint attempt
             if count == 3:
                 for recipient in recipients:
-                    msg = "Hi there,\n\nDeployment of HIS-Core to v1.2.12 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
+                    msg = "Hi there,\n\nDeployment of HIS-Core to v1.2.12 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF/LIN HIS."
                     params = {
                         "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
