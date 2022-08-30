@@ -3,8 +3,8 @@ import utils
 from invoke import Responder
 from fabric import Connection
 
-cluster_endpoint = 'http://10.44.0.52/sites/api/v1/get_single_cluster/1'
-site_endpoint = 'http://10.44.0.52/sites/api/v1/get_single_site/'
+cluster_endpoint = 'http://10.44.0.52:8000/sites/api/v1/get_single_cluster/1'
+site_endpoint = 'http://10.44.0.52:8000/sites/api/v1/get_single_site/'
 
 
 
