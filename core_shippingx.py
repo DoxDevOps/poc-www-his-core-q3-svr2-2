@@ -24,9 +24,10 @@ def alert(url, params):
     try:
         headers = {'Content-type': 'application/json; charset=utf-8'}
         r = requests.post(url, json=params, headers=headers)
+        print("SMS sent successfully")
         
     except Exception as e:
-        print(e)
+        print("Failed to send SMS with exception: ", e)
         return False
     return True
 
