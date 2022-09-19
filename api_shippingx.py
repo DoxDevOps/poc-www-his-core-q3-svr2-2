@@ -6,7 +6,7 @@ import os
 from fabric import Connection
 from dotenv import load_dotenv
 load_dotenv()
-import openai
+#import openai
 """ 
 * get data from Xi
 * @params url
@@ -85,8 +85,7 @@ for site_id in cluster['site']:
             for recipient in recipients:
                 msg = "Hi there,\n\nDeployment of API to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
                 params = {
-                    #"api_key": os.getenv('API_KEY'),
-                    "openai.api_key": os.environ["API_KEY"],
+                    "api_key": os.getenv('API_KEY'),
                     "recipient": recipient,
                     "message": msgx
                 }
