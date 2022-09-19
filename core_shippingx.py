@@ -6,8 +6,9 @@ import os
 from fabric import Connection
 from dotenv import load_dotenv
 load_dotenv()
-from dotenv import dotenv_values
-config = dotenv_values(".env")
+#from dotenv import dotenv_values
+#config = dotenv_values(".env")
+#API_KEY = os.getenv('API_KEY')
 
 """ 
 * Gets data from Xi API
