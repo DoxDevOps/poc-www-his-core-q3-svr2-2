@@ -6,7 +6,7 @@ import os
 from fabric import Connection
 from dotenv import load_dotenv
 load_dotenv()
-API_KEY = os.getenv('PROJECT_API_KEY')
+#API_KEY = os.getenv('PROJECT_API_KEY')
 
 """ 
 * get data from Xi
@@ -86,8 +86,7 @@ for site_id in cluster['site']:
             for recipient in recipients:
                 msg = "Hi there,\n\nDeployment of API to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
                 params = {
-                    "api_key": API_KEY,
-                    #"api_key": os.getenv('API_KEY'),
+                    "api_key": os.getenv('API_KEY'),
                     "recipient": recipient,
                     "message": msgx
                 }
