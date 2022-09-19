@@ -86,7 +86,7 @@ for site_id in cluster['site']:
                 msg = "Hi there,\n\nDeployment of API to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
                 params = {
                     #"api_key": os.getenv('API_KEY'),
-                   openai.api_key = os.environ["OPENAI_API_KEY"]
+                   "openai.api_key": os.environ["OPENAI_API_KEY"]
                     "recipient": recipient,
                     "message": msgx
                 }
