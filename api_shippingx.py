@@ -85,7 +85,7 @@ for site_id in cluster['site']:
             for recipient in recipients:
                 msg = "Hi there,\n\nDeployment of API to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF/LIN HIS."
                 params = {
-                    "api_key": os.getenv('OPENAI_API_KEY'),
+                    "api_key": os.getenv('API_KEY'),
                     "recipient": recipient,
                     "message": msgx
                 }
@@ -103,7 +103,7 @@ for site_id in cluster['site']:
                 for recipient in recipients:
                     msg = "Hi there,\n\nDeployment of API to v4.15.8 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF/LIN HIS."
                     params = {
-                        "api_key": os.getenv('OPENAI_API_KEY'),
+                        "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
                         "message": msg
                     }
